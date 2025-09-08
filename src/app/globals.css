@@ -3,24 +3,135 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --primary: #6366f1;
+  --secondary: #f472b6;
+  --accent: #fbbf24;
+  --radius: 0.5rem;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-geist-sans), 'Inter', 'Segoe UI', Arial, Helvetica, sans-serif;
+  --font-mono: var(--font-geist-mono), 'Fira Mono', 'Menlo', monospace;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
     --foreground: #ededed;
+    --primary: #818cf8;
+    --secondary: #f9a8d4;
+    --accent: #fde68a;
   }
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans);
+  min-height: 100vh;
+  transition: background 0.3s, color 0.3s;
+  line-height: 1.7;
+  letter-spacing: 0.01em;
+  /* Tailwind-like container */
+  @apply antialiased;
+  padding: 0;
+  margin: 0;
+}
+
+a {
+  color: var(--primary);
+  text-decoration: none;
+  transition: color 0.2s;
+  border-radius: var(--radius);
+  padding: 0.1em 0.2em;
+}
+a:hover, a:focus {
+  color: var(--secondary);
+  background: rgba(99,102,241,0.08);
+  outline: none;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-sans);
+  font-weight: 700;
+  margin-top: 1.5em;
+  margin-bottom: 0.5em;
+  letter-spacing: -0.01em;
+}
+
+h1 { font-size: 2.25rem; }
+h2 { font-size: 1.5rem; }
+h3 { font-size: 1.25rem; }
+h4 { font-size: 1.125rem; }
+h5 { font-size: 1rem; }
+h6 { font-size: 0.875rem; }
+
+p {
+  margin: 1em 0;
+}
+
+code, pre {
+  font-family: var(--font-mono);
+  background: rgba(99,102,241,0.08);
+  color: var(--primary);
+  border-radius: var(--radius);
+  padding: 0.2em 0.4em;
+}
+
+pre {
+  padding: 1em;
+  overflow-x: auto;
+}
+
+button, input, textarea, select {
+  font-family: inherit;
+  border-radius: var(--radius);
+  border: 1px solid #e5e7eb;
+  padding: 0.5em 1em;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  outline: none;
+}
+
+button {
+  background: var(--primary);
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  box-shadow: 0 1px 2px 0 rgba(0,0,0,0.03);
+}
+button:hover, button:focus {
+  background: var(--secondary);
+  color: #fff;
+}
+
+input:focus, textarea:focus, select:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 2px rgba(99,102,241,0.15);
+}
+
+hr {
+  border: none;
+  border-top: 1px solid #e5e7eb;
+  margin: 2em 0;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  background: var(--background);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--primary);
+  border-radius: 4px;
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--foreground);
 }
