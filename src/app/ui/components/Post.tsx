@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import React, { JSX } from 'react';
 
 export default function Component({ id, title, content, date }: { id: string, title: string, content: string, date: string }) {
     return (
