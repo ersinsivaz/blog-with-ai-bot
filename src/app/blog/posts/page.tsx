@@ -1,11 +1,25 @@
+"use client";
 
 import {posts} from '@/app/data/data';
 import Post from '@/app/ui/components/Post';
-export default async function Posts() {
-    await new Promise((resolve) => setTimeout(resolve, 5000)); // Simulate a 1 second delay
+import { User } from '@/app/data/models/user';
+import { useState,useEffect } from 'react';
+import { getSession } from 'next-auth/react';
+
+export default function Posts() {
+    //await new Promise((resolve) => setTimeout(resolve, 2000));
+
+    const [user, setUser] = useState<User | null>(null);
+
+    useEffect(() => {
+        getSession().then((session) => {
+            setUser(session?.user || null);
+        })
+    }, []);
+
     return (
         <>
-            <h2>Blog Posts</h2>
+            <h3>Welcome {user?.name || 'Guest'}</h3>
             {posts.map((post) => (
                 <Post key={post.id} {...post} />
             ))}
